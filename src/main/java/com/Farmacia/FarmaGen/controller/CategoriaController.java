@@ -46,10 +46,10 @@ public class CategoriaController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id não encontrado"));
 	}
 
-	@GetMapping("/nome/{categoria}")
+	@GetMapping("/nome/{tipo}")
 	public ResponseEntity<List<CategoriaModel>> findByDescricaoCategoria(
-			@PathVariable(value = "categoria") String categoria) {
-		return ResponseEntity.ok(repository.findAllByCategoriaContainingIgnoreCase(categoria));
+			@PathVariable(value = "tipo") String tipo) {
+		return ResponseEntity.ok(repository.findAllByTipoContainingIgnoreCase(tipo));
 	}
 
 	@PostMapping("/save")

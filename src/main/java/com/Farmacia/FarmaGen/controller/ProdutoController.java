@@ -1,5 +1,7 @@
 package com.Farmacia.FarmaGen.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.Farmacia.FarmaGen.model.ProdutoModel;
+import com.Farmacia.FarmaGen.repository.ProdutoRepository;
+
 /**
  * Classe responsável pelo CRUD
  * 
@@ -29,7 +34,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ProdutoController {
 	
 	@Autowired
-	private ProdutoReository repository;
+	private ProdutoRepository repository;
 	
 	@GetMapping
 	public ResponseEntity<List<ProdutoModel>> GetAll(){
@@ -44,16 +49,16 @@ public class ProdutoController {
 	
 	@GetMapping("/nome/{produto}")
 	public ResponseEntity<List<ProdutoModel>> GetByProduto(@PathVariable String produto){
-		return Response.ok(repository.findAllByNomeContainingIgnoreCase(produto));
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(produto));
 	}
 	
 	@PostMapping("/save")
 	public ResponseEntity<ProdutoModel> post(@Valid @RequestBody ProdutoModel produto){
-		return ResponseEntity<ProdutoModel> post(@Valid @RequestBody ProdutoModel produto);			
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));			
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ProdutoModel> put(@valid @RequestBody ProdutoModel produto){
+	public ResponseEntity<ProdutoModel> put(@Valid @RequestBody ProdutoModel produto){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(produto));
 	}
 	

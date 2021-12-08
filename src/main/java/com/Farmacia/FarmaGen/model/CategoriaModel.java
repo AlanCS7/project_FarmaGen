@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.minhaLojaDeGames.PlayGen.model.ProdutoModel;
-
 /**
 *
 * Classe responsável pela tabela categoria no banco de dados
